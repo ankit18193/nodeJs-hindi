@@ -1,0 +1,2 @@
+hello world from node js
+appending text to file
