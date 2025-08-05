@@ -4,7 +4,7 @@
   "description": "node Js",
   "main": "01script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "Ankit kr Yadav",
   "license": "ISC",
@@ -12,7 +12,17 @@
     "cookie-parser": "^1.4.7",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "mongoose": "^8.17.0",
     "nodemon": "^3.1.10",
     "say": "^0.16.0"
-  }
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankit18193/nodeJs-hindi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ankit18193/nodeJs-hindi/issues"
+  },
+  "homepage": "https://github.com/ankit18193/nodeJs-hindi#readme"
 }

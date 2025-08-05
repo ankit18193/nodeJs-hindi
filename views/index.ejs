@@ -5,10 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/stylesheet/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script> 
 </head>
 <body>
-    <h1>hello world from node EJS</h1>
+    <div class="w-full min-h-screen bg-zinc-900 p-3">
+        <h1 class="text-center text-white text-lg">form Example</h1>
+        <form action="/create" method="post">
+            <input class="block px-3 mt-8 w-full bg-zinc-800 mt-5 text-white outline-none rounded-md mb-7" placeholder="text here" name="title"></input>
+            <textarea class="block h-20 px-3 mt-5 w-full bg-zinc-800 mb-4 text-white outline-none rounded-md resize-none" placeholder="text here" name="details"></textarea>
+            <input class="bg-blue-500 rounded-md text-white mt-5 mb-4 px-3 py-5" type="submit" value="Create task">
+        </form>
+        <div class="flex flex-wrap gap-5 m-10 mt-5 mb-4">
+          <% if(files.length>0){  %>
+            <% files.forEach(function(val){  %>
+
+               <div class="px-3 py-5   bg-zinc-800 w-auto h-auto rounded-md "> 
+                  <h1 class="tracking-tighter text-3xl text-white"><%=val%></h1>
+                  <div class="flex justify-between">
+                    <a  class="text-blue-500 inline-block" href="/files/<%= val%>">Read more.</a>
+                    <a  class="text-zinc-400" href="/edit/<%= val %>">edit</a>
+                </div>
+                  </div>
+
+                    <% }) %> 
+                     <% }else{ %>
+                        <div class="text-zinc-500">no task yet</div>
+
+                    <% }%>
+           
+          
+            
+
+        </div>
+    </div>
+
+    
 
     
 </body>

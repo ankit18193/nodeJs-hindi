@@ -1,51 +1,45 @@
-const express=require('express')
-const path =require('path')
+const express=require('express');
 const app=express();
-
-
-// setting up parses for form 
+const path=require('path');
+const fs=require('fs');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname,'public')));
 
-
-// EJS ka full form hai Embedded JavaScript.
-
-// Ye ek templating engine hai jo tu Express.js ke sath use karta
-//  hai taaki tu dynamic HTML pages bana sake JavaScript code ke 
-// sath.
-
-app.set('view engine','ejs')
+app.set('view engine','ejs');
 
 app.get("/",(req,res)=>{
-    res.render("index.ejs")
+    fs.readdir(`./files`,(err,files)=>{
+
+        res.render("index.ejs",{files:files});
+    })
 })
 
-
-
-app.get("/",(req,res)=>{
-    res.send("hello from routing");
-    
+app.get("/files/:filename",(req,res)=>{
+    fs.readFile(`./files/${req.params.filename}`,"utf-8",(err,filedata)=>{
+        res.render('show',{filename:req.params.filename,filedata:filedata})
+        })
+})
+app.post("/create",(req,res)=>{
+    fs.writeFile(`./files/${req.body.title.split(" ").join("")}.txt`,req.body.details,(err)=>{
+        res.redirect("/")
+    })
 })
 
-
-app.get("/profile/:username",(req,res,next)=>{
-    res.send(req.params.username)
-
+app.get("/edit/:filename",(req,res)=>{
+    res.render('edit',{filename:req.params.filename})
 })
 
+app.post("/edit",(req,res)=>{
+    fs.rename(`./files/${req.body.oldname}`,`./files/${req.body.newname}`,(err)=>{
 
-
-app.get("/chotu",(req,res,next)=>{
-   res.send("chotu....")
+        res.redirect("/")
+        
+    })
 })
 
-
-
-
-
-app.listen(30000,()=>{
-    console.log("yeah! its working!");
+app.listen(3000,()=>{
+    console.log("yeah its working ");
     
 })
